@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  php-fpm:
+    build:
+      context: ./docker/php
+      args:
+        - TZ=${TZ}
+    ports:
+      - 9000:9000
+    volumes:
+      - ./app:/var/www/html
+      - ./logs/php:/var/log/php
+    working_dir: /var/www/html
+    environment:
+      - TZ=${TZ}
+
+  nginx:
+    build: ./docker/nginx
+    depends_on:
+      - php-fpm
+    ports:
+      - 80:80
+    volumes:
+      - ./app:/var/www/html
+      - ./logs/nginx:/var/log/nginx
+    working_dir: /var/www/html
+
+  db-mariadb:
+    build: ./docker/mysql
+    volumes:
+      - db-store:/var/lib/mysql
+      - ./logs/mysql:/var/log/mysql
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - TZ=${TZ}
+
+volumes:
+  db-store:
