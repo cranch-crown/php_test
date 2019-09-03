@@ -8,4 +8,8 @@ Docker Compose for PHP-FPM, nginx, MariaDB development environment.
 * Docker Compose
 
 ## Usage
-simply run `docker-compose up` and `docker-compose stop`
+First set argument in .env file.
+* DB_NAME: Database name in MariaDB
+* DB_USER: Create user in MariaDB
+* DB_PASS: Set password to DB_USER and root user
+* TZ: timezone
