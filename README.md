@@ -14,4 +14,4 @@ PHP-FPM, nginx, MariaDBのPHP用開発環境です。
 * DB_PASS: rootユーザーと、上記のユーザーにこの値のパスワードを設定します。
 * TZ: MariaDBとPHPに設定するタイムゾーンです。
 
-設定し終わったら`docker-compose up`で立ち上げます。
+設定し終わったら`docker-compose up`で立ち上げます。`app`ディレクトがnginxのルートディレクトリになっています。
